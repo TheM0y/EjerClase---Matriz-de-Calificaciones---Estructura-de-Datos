@@ -1,11 +1,9 @@
 import numpy as np
-import random
 
 def pedir_numero(mensaje):
     while True:
         try:
-            valor = int(input(mensaje))
-            return valor
+            return int(input(mensaje))
         except ValueError:
             print("Error: Ingrese un número válido.")
 
@@ -13,20 +11,17 @@ NUM_ALUMNOS = pedir_numero("Ingrese el número de alumnos: ")
 NUM_MATERIAS = pedir_numero("Ingrese el número de materias: ")
 
 materias = [f"Materia {i+1}" for i in range(NUM_MATERIAS)]
-calificaciones = np.random.randint(50, 100, (NUM_ALUMNOS, NUM_MATERIAS))
+calificaciones = np.random.randint(50, 101, (NUM_ALUMNOS, NUM_MATERIAS))
 
 def mostrar_matriz():
-    print("\nMatriz de Calificaciones:\n")
-    print(" " * 10, end="")
-    for materia in materias:
-        print(f"{materia:^10}", end=" ")
-    print("\n" + "-" * (10 + NUM_MATERIAS * 12))
-
+    print("\nMatriz de Calificaciones:")
+    encabezado = " " * 10 + "  ".join([f"{materia:^10}" for materia in materias])
+    print(encabezado)
+    print("-" * len(encabezado))
+    
     for i in range(NUM_ALUMNOS):
-        print(f"Alumno {i+1:<3} |", end=" ")
-        for calificacion in calificaciones[i]:
-            print(f"{calificacion:^10}", end=" ")
-        print()
+        fila = f"Alumno {i+1:<3} | " + "  ".join([f"{calificacion:^10}" for calificacion in calificaciones[i]])
+        print(fila)
 
 def buscar_calificacion():
     try:
